@@ -1,4 +1,4 @@
-import 'package:cybear_jinni/domain/devices/generic_light_device/generic_light_entity.dart';
+import 'package:cybear_jinni/domain/generic_devices/generic_light_device/generic_light_entity.dart';
 import 'package:cybear_jinni/infrastructure/core/gen/cbj_hub_server/protoc_as_dart/cbj_hub_server.pbgrpc.dart';
 import 'package:flutter/material.dart';
 
@@ -9,23 +9,20 @@ class BlindsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size screenSize = MediaQuery.of(context).size;
-    final double sizeBoxWidth = screenSize.width * 0.25;
-
-    final deviceState = _deviceEntity.deviceStateGRPC.getOrCrash();
+    final deviceState = _deviceEntity.entityStateGRPC.getOrCrash();
     final deviceAction = _deviceEntity.lightSwitchState!.getOrCrash();
 
-    bool toggleValue = false;
-    Color toggleColor = Colors.blueGrey;
+    // bool toggleValue = false;
+    // Color toggleColor = Colors.blueGrey;
 
-    if (deviceAction == DeviceActions.on.toString()) {
-      toggleValue = true;
-      if (deviceState == DeviceStateGRPC.ack.toString()) {
-        toggleColor = const Color(0xFFFFDF5D);
+    if (deviceAction == EntityActions.on.toString()) {
+      // toggleValue = true;
+      if (deviceState == EntityStateGRPC.ack.toString()) {
+        // toggleColor = const Color(0xFFFFDF5D);
       }
     } else {
-      if (deviceState == DeviceStateGRPC.ack.toString()) {
-        toggleColor = Theme.of(context).primaryColorDark;
+      if (deviceState == EntityStateGRPC.ack.toString()) {
+        // toggleColor = Theme.of(context).primaryColorDark;
       }
     }
 
@@ -51,10 +48,10 @@ class BlindsCard extends StatelessWidget {
     //           activeToggleColor: const Color(0xFF2F363D),
     //           inactiveToggleColor: Theme.of(context).primaryColor,
     //           activeSwitchBorder: Border.all(
-    //             color: (Theme.of(context).textTheme.bodyText1!.color)!,
+    //             color: (Theme.of(context).textTheme.bodyLarge!.color)!,
     //           ),
     //           inactiveSwitchBorder: Border.all(
-    //             color: (Theme.of(context).textTheme.bodyText1!.color)!,
+    //             color: (Theme.of(context).textTheme.bodyLarge!.color)!,
     //           ),
     //           activeColor: toggleColor,
     //           inactiveColor: toggleColor,
@@ -64,7 +61,7 @@ class BlindsCard extends StatelessWidget {
     //           ),
     //           inactiveIcon: Icon(
     //             FontAwesomeIcons.lightbulb,
-    //             color: (Theme.of(context).textTheme.bodyText1!.color)!,
+    //             color: (Theme.of(context).textTheme.bodyLarge!.color)!,
     //           ),
     //           onToggle: (bool value) => _onChange(context, value)
     //           // _onChange(context, value),

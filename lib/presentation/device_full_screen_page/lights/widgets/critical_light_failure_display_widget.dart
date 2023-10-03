@@ -1,11 +1,11 @@
-import 'package:cybear_jinni/domain/devices/device/devices_failures.dart';
+import 'package:cybear_jinni/domain/device/devices_failures.dart';
 import 'package:flutter/material.dart';
 
 class CriticalLightFailureDisplay extends StatelessWidget {
   const CriticalLightFailureDisplay({
     required this.failure,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final DevicesFailure? failure;
 
@@ -30,15 +30,15 @@ class CriticalLightFailureDisplay extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {},
-            child: Row(
+            child: const Row(
               mainAxisSize: MainAxisSize.min,
-              children: const <Widget>[
+              children: <Widget>[
                 Icon(Icons.mail),
                 SizedBox(width: 4),
                 Text('I NEED HELP'),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

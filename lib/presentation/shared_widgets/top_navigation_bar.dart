@@ -42,7 +42,7 @@ class TopNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return ColoredBox(
       color: backgroundColor != null
           ? backgroundColor!.withOpacity(0.72)
           : Colors.black.withOpacity(0.3),
@@ -60,7 +60,7 @@ class TopNavigationBar extends StatelessWidget {
                       icon: FaIcon(
                         leftIcon,
                         size: 19,
-                        color: Theme.of(context).textTheme.bodyText1!.color,
+                        color: Theme.of(context).textTheme.bodyLarge!.color,
                       ),
                       onPressed: () => leftIconFunction!(context),
                     ),
@@ -71,7 +71,7 @@ class TopNavigationBar extends StatelessWidget {
                   pageName!,
                   style: TextStyle(
                     fontSize: 16.0,
-                    color: Theme.of(context).textTheme.bodyText1!.color,
+                    color: Theme.of(context).textTheme.bodyLarge!.color,
                   ),
                 ).tr(),
               ],
@@ -92,7 +92,7 @@ class TopNavigationBar extends StatelessWidget {
                         child: FaIcon(
                           rightSecondIcon,
                           size: 19,
-                          color: Theme.of(context).textTheme.bodyText1!.color,
+                          color: Theme.of(context).textTheme.bodyLarge!.color,
                         ),
                       ),
                     ),
@@ -108,7 +108,7 @@ class TopNavigationBar extends StatelessWidget {
                       child: Icon(
                         rightIcon,
                         size: 26,
-                        color: Theme.of(context).textTheme.bodyText1!.color,
+                        color: Theme.of(context).textTheme.bodyLarge!.color,
                       ),
                     ),
                   ),

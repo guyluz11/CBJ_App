@@ -8,9 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class SoftwareInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final Size screenSize = MediaQuery.of(context).size;
-    final double sizeBoxWidth = screenSize.width * 0.25;
-
     return BlocBuilder<SoftwareInfoBloc, SoftwareInfoState>(
       builder: (context, state) {
         return state.map(
@@ -35,7 +32,7 @@ class SoftwareInfoWidget extends StatelessWidget {
                       style: const TextStyle(fontSize: 26),
                     ),
                     ListTileTheme(
-                      textColor: Theme.of(context).textTheme.bodyText1!.color,
+                      textColor: Theme.of(context).textTheme.bodyLarge!.color,
                       child: Column(
                         children: [
                           ListTile(
@@ -75,12 +72,15 @@ class SoftwareInfoWidget extends StatelessWidget {
                           ),
                           ListTile(
                             title: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const Text('Dart SDK version: '),
-                                Text(
-                                  softwareInfoEntity?.dartSdkVersion
-                                          .getOrCrash() ??
-                                      'No Info',
+                                Flexible(
+                                  child: Text(
+                                    softwareInfoEntity?.dartSdkVersion
+                                            .getOrCrash() ??
+                                        'No Info',
+                                  ),
                                 ),
                               ],
                             ),

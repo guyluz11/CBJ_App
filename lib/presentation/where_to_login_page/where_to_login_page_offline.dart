@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 /// The user will choose where to login to, options only for offline
+@RoutePage()
 class WhereToLoginPageOffline extends StatelessWidget {
   const WhereToLoginPageOffline();
 
@@ -34,7 +35,7 @@ class WhereToLoginPageOffline extends StatelessWidget {
               'What would you like to do',
               style: TextStyle(
                 fontSize: 25,
-                color: Theme.of(context).textTheme.bodyText1!.color,
+                color: Theme.of(context).textTheme.bodyLarge!.color,
               ),
             ),
           ),
@@ -62,7 +63,7 @@ class WhereToLoginPageOffline extends StatelessWidget {
                             FaIcon(
                               FontAwesomeIcons.vial,
                               color:
-                                  Theme.of(context).textTheme.bodyText1!.color,
+                                  Theme.of(context).textTheme.bodyLarge!.color,
                             ),
                             const SizedBox(
                               width: 20,
@@ -73,7 +74,7 @@ class WhereToLoginPageOffline extends StatelessWidget {
                                 fontSize: 25,
                                 color: Theme.of(context)
                                     .textTheme
-                                    .bodyText1!
+                                    .bodyLarge!
                                     .color,
                               ),
                             ),
@@ -104,7 +105,7 @@ class WhereToLoginPageOffline extends StatelessWidget {
                             FaIcon(
                               FontAwesomeIcons.tree,
                               color:
-                                  Theme.of(context).textTheme.bodyText1!.color,
+                                  Theme.of(context).textTheme.bodyLarge!.color,
                             ),
                             const SizedBox(
                               width: 20,
@@ -115,7 +116,7 @@ class WhereToLoginPageOffline extends StatelessWidget {
                                 fontSize: 25,
                                 color: Theme.of(context)
                                     .textTheme
-                                    .bodyText1!
+                                    .bodyLarge!
                                     .color,
                               ),
                             ),

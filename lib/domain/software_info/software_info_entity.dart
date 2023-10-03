@@ -60,7 +60,7 @@ class SoftwareInfoEntity {
     final CompHubSpecs compAppSpecs = compHubInfo.compSpecs;
 
     return SoftwareInfoEntity(
-      deviceName: SoftwareInfoDeviceName(cbjHubIno.deviceName),
+      deviceName: SoftwareInfoDeviceName(cbjHubIno.entityName),
       pubspecYamlVersion:
           SoftwareInfoPubspecYamlVersion(cbjHubIno.pubspecYamlVersion),
       protoLastGenDate:

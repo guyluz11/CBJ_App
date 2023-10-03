@@ -30,7 +30,7 @@ class AddBindingsPage extends StatelessWidget {
               Theme.of(context).primaryColor,
               Theme.of(context).colorScheme.secondary,
               Theme.of(context).colorScheme.secondary,
-              Theme.of(context).primaryColor
+              Theme.of(context).primaryColor,
             ],
           ),
         ),
@@ -65,7 +65,7 @@ class AddBindingsPage extends StatelessWidget {
                 child: Text(
                   'Set Home Location',
                   style: TextStyle(
-                    color: Theme.of(context).textTheme.bodyText1!.color,
+                    color: Theme.of(context).textTheme.bodyLarge!.color,
                   ),
                 ),
               ),

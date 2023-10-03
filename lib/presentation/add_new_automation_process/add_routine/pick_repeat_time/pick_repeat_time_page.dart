@@ -10,6 +10,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 /// Page for adding new routine
+@RoutePage()
 class PickRepeatTimePage extends StatelessWidget {
   void backButtonFunction(BuildContext context) {
     Navigator.pop(context);
@@ -17,14 +18,14 @@ class PickRepeatTimePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<DayInWeek> _days = [
-      DayInWeek("Sun"),
-      DayInWeek("Mon"),
-      DayInWeek("Tue", isSelected: true),
-      DayInWeek("Wed"),
-      DayInWeek("Thu"),
-      DayInWeek("Fri"),
-      DayInWeek("Sat"),
+    final List<DayInWeek> days = [
+      DayInWeek('Sun', dayKey: 'Sun'),
+      DayInWeek('Mon', dayKey: 'Mon'),
+      DayInWeek('Tue', dayKey: 'Tue', isSelected: true),
+      DayInWeek('Wed', dayKey: 'Wed'),
+      DayInWeek('Thu', dayKey: 'Thu'),
+      DayInWeek('Fri', dayKey: 'Fri'),
+      DayInWeek('Sat', dayKey: 'Sat'),
     ];
 
     RoutineCbjRepeatDateDays? daysToRepeat;
@@ -37,7 +38,7 @@ class PickRepeatTimePage extends StatelessWidget {
         backgroundColor: Colors.black,
         systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
-      body: Container(
+      body: ColoredBox(
         color: HexColor('#FBF5F9'),
         child: Column(
           children: [
@@ -71,7 +72,7 @@ class PickRepeatTimePage extends StatelessWidget {
                         SelectWeekDays(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                          days: _days,
+                          days: days,
                           border: false,
                           boxDecoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30.0),
@@ -88,10 +89,10 @@ class PickRepeatTimePage extends StatelessWidget {
                         const SizedBox(
                           height: 2,
                         ),
-                        createInlinePicker(
-                          context: context,
+                        showPicker(
+                          isInlinePicker: true,
                           is24HrFormat: true,
-                          value: const TimeOfDay(hour: 4, minute: 44),
+                          value: Time(hour: 4, minute: 44),
                           onChange: (TimeOfDay dateTimePicked) {
                             hourToRepeat = RoutineCbjRepeatDateHour(
                               dateTimePicked.hour.toString(),
@@ -102,7 +103,7 @@ class PickRepeatTimePage extends StatelessWidget {
                           },
                           cancelText: '',
                           okText: 'Confirm Time',
-                        ),
+                        ) as Widget,
                         const SizedBox(
                           height: 40,
                         ),

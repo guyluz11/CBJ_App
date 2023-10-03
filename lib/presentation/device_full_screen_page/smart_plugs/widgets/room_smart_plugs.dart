@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cybear_jinni/application/smart_plug_toggle/smart_plug_toggle_bloc.dart';
-import 'package:cybear_jinni/domain/devices/abstract_device/device_entity_abstract.dart';
-import 'package:cybear_jinni/domain/devices/generic_smart_plug_device/generic_smart_plug_entity.dart';
+import 'package:cybear_jinni/domain/generic_devices/abstract_device/device_entity_abstract.dart';
+import 'package:cybear_jinni/domain/generic_devices/generic_smart_plug_device/generic_smart_plug_entity.dart';
 import 'package:cybear_jinni/injection.dart';
 import 'package:cybear_jinni/presentation/device_full_screen_page/smart_plugs/widgets/error_smart_plugs_device_card_widget.dart';
 import 'package:cybear_jinni/presentation/device_full_screen_page/smart_plugs/widgets/smart_plugs_widget.dart';
@@ -39,12 +39,12 @@ class RoomSmartPlugs extends StatelessWidget {
       final List<Widget> columnOfSmartPlugs = <Widget>[];
       List<Widget> widgetsForRow = <Widget>[];
 
-      final int _numberOfSmartPlugsToShow =
+      final int numberOfSmartPlugsToShow =
           _deviceEntityList.size > maxSmartPlugsToShow
               ? maxSmartPlugsToShow
               : _deviceEntityList.size;
 
-      for (int i = 0; i < _numberOfSmartPlugsToShow; i += _maxSmartPlugsInRow) {
+      for (int i = 0; i < numberOfSmartPlugsToShow; i += _maxSmartPlugsInRow) {
         for (int v = 0; v < _maxSmartPlugsInRow; v++) {
           if (_deviceEntityList.size > i + v &&
               _deviceEntityList[i + v] is GenericSmartPlugDE) {
@@ -58,11 +58,11 @@ class RoomSmartPlugs extends StatelessWidget {
                 Column(
                   children: [
                     AutoSizeText(
-                      deviceEntityTemp.defaultName.getOrCrash()!,
+                      deviceEntityTemp.cbjEntityName.getOrCrash()!,
                       maxLines: 1,
                       maxFontSize: 19,
                       style: TextStyle(
-                        color: Theme.of(context).textTheme.bodyText1!.color,
+                        color: Theme.of(context).textTheme.bodyLarge!.color,
                       ),
                     ),
                     Container(
@@ -114,7 +114,7 @@ class RoomSmartPlugs extends StatelessWidget {
         ),
         borderRadius: const BorderRadius.all(Radius.circular(24)),
         border: Border.all(
-          color: (Theme.of(context).textTheme.bodyText1!.color)!,
+          color: Theme.of(context).textTheme.bodyLarge!.color!,
           width: 0.6,
         ),
       ),
@@ -146,7 +146,7 @@ class RoomSmartPlugs extends StatelessWidget {
                   Text(
                     _roomEntity,
                     style: TextStyle(
-                      color: Theme.of(context).textTheme.bodyText1!.color,
+                      color: Theme.of(context).textTheme.bodyLarge!.color,
                       fontSize: 25,
                       decoration: TextDecoration.underline,
                     ),
@@ -154,7 +154,7 @@ class RoomSmartPlugs extends StatelessWidget {
                   if (_deviceEntityList.size > maxSmartPlugsToShow)
                     FaIcon(
                       FontAwesomeIcons.arrowRight,
-                      color: Theme.of(context).textTheme.bodyText1!.color,
+                      color: Theme.of(context).textTheme.bodyLarge!.color,
                       size: 20,
                     ),
                 ],

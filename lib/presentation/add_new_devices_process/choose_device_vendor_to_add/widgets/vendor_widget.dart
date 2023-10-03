@@ -22,25 +22,34 @@ class VendorWidget extends StatelessWidget {
             .replaceAll('_', '');
 
         if (vendorName == VendorsAndServices.lifx.name.toLowerCase()) {
-          context.router.push(const AddLifxVendorRoute());
+          context.router.push(AddLifxVendorRoute(vendor: vendor));
         } else if (vendorName ==
             VendorsAndServices.tuyaSmart.name.toLowerCase()) {
-          context.router.push(const AddTuyaVendorRoute());
+          context.router.push(AddTuyaVendorRoute(vendor: vendor));
         } else if (vendorName ==
             VendorsAndServices.smartLife.name.toLowerCase()) {
-          context.router.push(const AddSmartLifeVendorRoute());
+          context.router.push(AddSmartLifeVendorRoute(vendor: vendor));
         } else if (vendorName ==
             VendorsAndServices.jinvooSmart.name.toLowerCase()) {
-          context.router.push(const AddJinvooSmartVendorRoute());
+          context.router.push(AddJinvooSmartVendorRoute(vendor: vendor));
         } else if (vendorName ==
             VendorsAndServices.espHome.name.toLowerCase()) {
+          context.router.push(AddEspHomeVendorRoute(vendor: vendor));
+        } else if (vendorName ==
+            VendorsAndServices.xiaomiMi.name.toLowerCase()) {
+          context.router.push(AddXiaomiMiVendorRoute(vendor: vendor));
+        } else if (vendorName ==
+            VendorsAndServices.sonoffEweLink.name.toLowerCase()) {
+          context.router.push(AddEwelinkVendorRoute(vendor: vendor));
+        } else if (vendorName ==
+            VendorsAndServices.philipsHue.name.toLowerCase()) {
           Fluttertoast.showToast(
-            msg: '${vendor.name.getOrCrash()} devices can only be added '
-                'manually in the Hub',
+            msg:
+                'Please press the button on top of the Philips Hue Hub for and wait 20s',
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.SNACKBAR,
             backgroundColor: Colors.orangeAccent,
-            textColor: Theme.of(context).textTheme.bodyText1!.color,
+            textColor: Theme.of(context).textTheme.bodyLarge!.color,
             fontSize: 16.0,
           );
         } else {
@@ -50,7 +59,7 @@ class VendorWidget extends StatelessWidget {
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.SNACKBAR,
             backgroundColor: Colors.lightBlue,
-            textColor: Theme.of(context).textTheme.bodyText1!.color,
+            textColor: Theme.of(context).textTheme.bodyLarge!.color,
             fontSize: 16.0,
           );
         }

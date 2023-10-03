@@ -1,9 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cybear_jinni/application/smart_plugs/smart_plugs_actor/smart_plugs_actor_bloc.dart';
-import 'package:cybear_jinni/domain/devices/abstract_device/device_entity_abstract.dart';
-import 'package:cybear_jinni/domain/devices/generic_smart_plug_device/generic_smart_plug_entity.dart';
+import 'package:cybear_jinni/domain/generic_devices/abstract_device/device_entity_abstract.dart';
+import 'package:cybear_jinni/domain/generic_devices/generic_smart_plug_device/generic_smart_plug_entity.dart';
 import 'package:cybear_jinni/domain/room/room_entity.dart';
+import 'package:cybear_jinni/presentation/core/types_to_pass.dart';
 import 'package:cybear_jinni/presentation/routes/app_router.gr.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -20,13 +21,13 @@ class SmartPlugsInTheRoomBlock extends StatelessWidget {
   factory SmartPlugsInTheRoomBlock.withAbstractDevice({
     required RoomEntity roomEntityTemp,
     required List<DeviceEntityAbstract> tempDeviceInRoom,
-    required List<Color> tempRoomColorGradiant,
+    required ListOfColors tempRoomColorGradiant,
   }) {
     final List<GenericSmartPlugDE> tempSmartPlugsInRoom = [];
 
-    tempDeviceInRoom.forEach((element) {
+    for (final element in tempDeviceInRoom) {
       tempSmartPlugsInRoom.add(element as GenericSmartPlugDE);
-    });
+    }
 
     return SmartPlugsInTheRoomBlock(
       roomEntity: roomEntityTemp,
@@ -37,16 +38,16 @@ class SmartPlugsInTheRoomBlock extends StatelessWidget {
 
   final RoomEntity roomEntity;
   final List<GenericSmartPlugDE> smartPlugsInRoom;
-  final List<Color> roomColorGradiant;
+  final ListOfColors roomColorGradiant;
 
   @override
   Widget build(BuildContext context) {
     String deviceText;
     if (smartPlugsInRoom.length == 1) {
-      deviceText = smartPlugsInRoom[0].defaultName.getOrCrash()!;
+      deviceText = smartPlugsInRoom[0].cbjEntityName.getOrCrash()!;
     } else {
       deviceText =
-          '_SmartPlugs'.tr(args: [roomEntity.defaultName.getOrCrash()]);
+          '_SmartPlugs'.tr(args: [roomEntity.cbjEntityName.getOrCrash()]);
     }
 
     return GestureDetector(
@@ -98,7 +99,7 @@ class SmartPlugsInTheRoomBlock extends StatelessWidget {
                           border: Border.all(
                             color: Theme.of(context)
                                 .textTheme
-                                .bodyText1!
+                                .bodyLarge!
                                 .color!
                                 .withOpacity(0.5),
                           ),
@@ -109,7 +110,7 @@ class SmartPlugsInTheRoomBlock extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 13,
-                            color: Theme.of(context).textTheme.bodyText1!.color,
+                            color: Theme.of(context).textTheme.bodyLarge!.color,
                           ),
                         ),
                       ),
@@ -136,7 +137,7 @@ class SmartPlugsInTheRoomBlock extends StatelessWidget {
                   deviceText,
                   maxLines: 1,
                   style: TextStyle(
-                    color: Theme.of(context).textTheme.bodyText1!.color,
+                    color: Theme.of(context).textTheme.bodyLarge!.color,
                   ),
                 ),
               ],
@@ -171,7 +172,7 @@ class SmartPlugsInTheRoomBlock extends StatelessWidget {
                         'Off',
                         style: TextStyle(
                           fontSize: 14,
-                          color: Theme.of(context).textTheme.bodyText1!.color,
+                          color: Theme.of(context).textTheme.bodyLarge!.color,
                         ),
                       ).tr(),
                     ),
@@ -179,7 +180,7 @@ class SmartPlugsInTheRoomBlock extends StatelessWidget {
                       '·',
                       style: TextStyle(
                         fontSize: 14,
-                        color: Theme.of(context).textTheme.bodyText1!.color,
+                        color: Theme.of(context).textTheme.bodyLarge!.color,
                       ),
                     ),
                     TextButton(
@@ -203,7 +204,7 @@ class SmartPlugsInTheRoomBlock extends StatelessWidget {
                         'On',
                         style: TextStyle(
                           fontSize: 14,
-                          color: Theme.of(context).textTheme.bodyText1!.color,
+                          color: Theme.of(context).textTheme.bodyLarge!.color,
                         ),
                       ).tr(),
                     ),
@@ -219,9 +220,9 @@ class SmartPlugsInTheRoomBlock extends StatelessWidget {
 
   List<String> extractDevicesId() {
     final List<String> devicesIdList = [];
-    smartPlugsInRoom.forEach((element) {
+    for (final element in smartPlugsInRoom) {
       devicesIdList.add(element.uniqueId.getOrCrash());
-    });
+    }
     return devicesIdList;
   }
 }

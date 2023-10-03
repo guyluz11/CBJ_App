@@ -11,6 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+@RoutePage()
 class ManageUsersPage extends StatelessWidget {
   /// Execute when user press the icon in top right side
   void userCogFunction(BuildContext context) {
@@ -61,7 +62,7 @@ class ManageUsersPage extends StatelessWidget {
             backgroundColor: Colors.black,
             systemOverlayStyle: SystemUiOverlayStyle.dark,
           ),
-          body: Container(
+          body: ColoredBox(
             color: Colors.black87,
             child: Column(
               children: [

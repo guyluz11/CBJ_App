@@ -5,6 +5,7 @@ import 'package:cybear_jinni/domain/local_db/i_local_db_repository.dart';
 import 'package:cybear_jinni/injection.dart';
 import 'package:cybear_jinni/presentation/core/app_widget.dart';
 import 'package:cybear_jinni/presentation/core/notifications.dart';
+import 'package:cybear_jinni/presentation/routes/app_router.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -41,9 +42,10 @@ class ReceivedNotification {
 Future<Unit> main() async {
   configureDependencies(Env.prod);
 
-  getIt<ILocalDbRepository>();
-
   WidgetsFlutterBinding.ensureInitialized();
+  getIt<ILocalDbRepository>();
+  getIt.registerSingleton<AppRouter>(AppRouter());
+
 
   AdState? adState;
   // Adds package only support Android and IOS
@@ -88,7 +90,7 @@ Future<Unit> main() async {
         Locale('th', 'TH'),
         Locale('zh', 'TW'),
       ],
-      path: 'assets/translations', // <-- change patch to your
+      path: 'assets/translations',
       fallbackLocale: const Locale('en', 'US'),
       child: Provider.value(
         value: adState,

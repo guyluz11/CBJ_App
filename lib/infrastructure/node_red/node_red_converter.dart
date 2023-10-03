@@ -1,7 +1,7 @@
 import 'package:cybear_jinni/domain/binding/binding_cbj_entity.dart';
 import 'package:cybear_jinni/domain/binding/value_objects_routine_cbj.dart';
 import 'package:cybear_jinni/domain/core/value_objects.dart';
-import 'package:cybear_jinni/domain/devices/abstract_device/device_entity_abstract.dart';
+import 'package:cybear_jinni/domain/generic_devices/abstract_device/device_entity_abstract.dart';
 import 'package:cybear_jinni/domain/routine/routine_cbj_entity.dart';
 import 'package:cybear_jinni/domain/routine/value_objects_routine_cbj.dart';
 import 'package:cybear_jinni/domain/scene/scene_cbj_entity.dart';
@@ -49,9 +49,9 @@ class NodeRedConverter {
     );
 
     if (nodes.isEmpty) {
-      nodes = '[${startingSceneNode.value}, ${brokerNode.toString()}]';
+      nodes = '[${startingSceneNode.value}, $brokerNode]';
     } else {
-      nodes = '[${startingSceneNode.value}, $nodes, ${brokerNode.toString()}]';
+      nodes = '[${startingSceneNode.value}, $nodes, $brokerNode]';
     }
     return SceneCbjEntity(
       uniqueId: UniqueId(),
@@ -63,8 +63,8 @@ class NodeRedConverter {
       iconCodePoint: SceneCbjIconCodePoint(null),
       image: SceneCbjBackgroundImage(null),
       lastDateOfExecute: SceneCbjLastDateOfExecute(null),
-      deviceStateGRPC: SceneCbjDeviceStateGRPC(
-        DeviceStateGRPC.addingNewScene.toString(),
+      entityStateGRPC: SceneCbjDeviceStateGRPC(
+        EntityStateGRPC.addingNewScene.toString(),
       ),
       senderDeviceModel: SceneCbjSenderDeviceModel(null),
       senderDeviceOs: SceneCbjSenderDeviceOs(null),
@@ -105,7 +105,7 @@ class NodeRedConverter {
       minutesToRepeat: minutesToRepeat,
     );
 
-    nodes = '[${startingRoutineNode.value}, $nodes, ${brokerNode.toString()}]';
+    nodes = '[${startingRoutineNode.value}, $nodes, $brokerNode]';
 
     return RoutineCbjEntity(
       uniqueId: UniqueId(),
@@ -118,8 +118,8 @@ class NodeRedConverter {
       iconCodePoint: RoutineCbjIconCodePoint(null),
       image: RoutineCbjBackgroundImage(null),
       lastDateOfExecute: RoutineCbjLastDateOfExecute(null),
-      deviceStateGRPC: RoutineCbjDeviceStateGRPC(
-        DeviceStateGRPC.addingNewRoutine.toString(),
+      entityStateGRPC: RoutineCbjDeviceStateGRPC(
+        EntityStateGRPC.addingNewRoutine.toString(),
       ),
       senderDeviceModel: RoutineCbjSenderDeviceModel(null),
       senderDeviceOs: RoutineCbjSenderDeviceOs(null),
@@ -161,7 +161,7 @@ class NodeRedConverter {
       wires: allNodeRedIdToConnectTo,
     );
 
-    nodes = '[${startingBindingNode.value}, $nodes, ${brokerNode.toString()}]';
+    nodes = '[${startingBindingNode.value}, $nodes, $brokerNode]';
 
     return BindingCbjEntity(
       uniqueId: UniqueId(),
@@ -174,8 +174,8 @@ class NodeRedConverter {
       iconCodePoint: BindingCbjIconCodePoint(null),
       image: BindingCbjBackgroundImage(null),
       lastDateOfExecute: BindingCbjLastDateOfExecute(null),
-      deviceStateGRPC: BindingCbjDeviceStateGRPC(
-        DeviceStateGRPC.addingNewBinding.toString(),
+      entityStateGRPC: BindingCbjDeviceStateGRPC(
+        EntityStateGRPC.addingNewBinding.toString(),
       ),
       senderDeviceModel: BindingCbjSenderDeviceModel(null),
       senderDeviceOs: BindingCbjSenderDeviceOs(null),
@@ -198,7 +198,7 @@ class NodeRedConverter {
     final NodeRedMqttOutNode mqttNode = NodeRedMqttOutNode(
       brokerNodeId: brokerNodeId,
       topic: topic,
-      name: '${device.defaultName.getOrCrash()} - $property',
+      name: '${device.cbjEntityName.getOrCrash()} - $property',
     );
 
     final NodeRedFunctionNode functionForNode =
@@ -214,7 +214,7 @@ class NodeRedConverter {
 
     return MapEntry(
       functionForNode.id!,
-      '${functionForNode.toString()}, ${mqttNode.toString()}',
+      '$functionForNode, $mqttNode',
     );
   }
 

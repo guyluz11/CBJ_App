@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cybear_jinni/application/boilers/boilers_actor/boilers_actor_bloc.dart';
-import 'package:cybear_jinni/domain/devices/abstract_device/device_entity_abstract.dart';
-import 'package:cybear_jinni/domain/devices/generic_boiler_device/generic_boiler_entity.dart';
+import 'package:cybear_jinni/domain/generic_devices/abstract_device/device_entity_abstract.dart';
+import 'package:cybear_jinni/domain/generic_devices/generic_boiler_device/generic_boiler_entity.dart';
 import 'package:cybear_jinni/injection.dart';
 import 'package:cybear_jinni/presentation/device_full_screen_page/boilers/widgets/boilers_widget.dart';
 import 'package:cybear_jinni/presentation/device_full_screen_page/boilers/widgets/error_boilers_device_card_widget.dart';
@@ -39,12 +39,12 @@ class RoomBoilers extends StatelessWidget {
       final List<Widget> columnOfBoilers = <Widget>[];
       List<Widget>? widgetsForRow = <Widget>[];
 
-      final int? _numberOfBoilersToShow =
+      final int? numberOfBoilersToShow =
           _deviceEntityList!.size > maxBoilersToShow!
               ? maxBoilersToShow
               : _deviceEntityList!.size;
 
-      for (int i = 0; i < _numberOfBoilersToShow!; i += _maxBoilersInRow) {
+      for (int i = 0; i < numberOfBoilersToShow!; i += _maxBoilersInRow) {
         for (int v = 0; v < _maxBoilersInRow; v++) {
           if (_deviceEntityList!.size > i + v) {
             final GenericBoilerDE? deviceEntityTemp;
@@ -63,11 +63,11 @@ class RoomBoilers extends StatelessWidget {
                 Column(
                   children: [
                     AutoSizeText(
-                      deviceEntityTemp.defaultName.getOrCrash()!,
+                      deviceEntityTemp.cbjEntityName.getOrCrash()!,
                       maxLines: 1,
                       maxFontSize: 19,
                       style: TextStyle(
-                        color: Theme.of(context).textTheme.bodyText1!.color,
+                        color: Theme.of(context).textTheme.bodyLarge!.color,
                       ),
                     ),
                     const SizedBox(
@@ -122,7 +122,7 @@ class RoomBoilers extends StatelessWidget {
         ),
         borderRadius: const BorderRadius.all(Radius.circular(24)),
         border: Border.all(
-          color: (Theme.of(context).textTheme.bodyText1!.color)!,
+          color: Theme.of(context).textTheme.bodyLarge!.color!,
           width: 0.6,
         ),
       ),
@@ -157,7 +157,7 @@ class RoomBoilers extends StatelessWidget {
                   Text(
                     _roomEntity!,
                     style: TextStyle(
-                      color: Theme.of(context).textTheme.bodyText1!.color,
+                      color: Theme.of(context).textTheme.bodyLarge!.color,
                       fontSize: 25,
                       decoration: TextDecoration.underline,
                     ),
@@ -166,7 +166,7 @@ class RoomBoilers extends StatelessWidget {
                       _deviceEntityList!.size > maxBoilersToShow!)
                     FaIcon(
                       FontAwesomeIcons.arrowRight,
-                      color: Theme.of(context).textTheme.bodyText1!.color,
+                      color: Theme.of(context).textTheme.bodyLarge!.color,
                       size: 20,
                     ),
                 ],

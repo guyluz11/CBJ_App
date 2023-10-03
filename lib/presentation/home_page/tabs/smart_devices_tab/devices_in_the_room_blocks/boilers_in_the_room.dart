@@ -1,8 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cybear_jinni/domain/devices/abstract_device/device_entity_abstract.dart';
-import 'package:cybear_jinni/domain/devices/generic_boiler_device/generic_boiler_entity.dart';
+import 'package:cybear_jinni/domain/generic_devices/abstract_device/device_entity_abstract.dart';
+import 'package:cybear_jinni/domain/generic_devices/generic_boiler_device/generic_boiler_entity.dart';
 import 'package:cybear_jinni/domain/room/room_entity.dart';
+import 'package:cybear_jinni/presentation/core/types_to_pass.dart';
 import 'package:cybear_jinni/presentation/routes/app_router.gr.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -18,13 +19,13 @@ class BoilersInTheRoom extends StatelessWidget {
   factory BoilersInTheRoom.withAbstractDevice({
     required RoomEntity roomEntity,
     required List<DeviceEntityAbstract> tempDeviceInRoom,
-    required List<Color> tempRoomColorGradiant,
+    required ListOfColors tempRoomColorGradiant,
   }) {
     final List<GenericBoilerDE> tempLightsInRoom = [];
 
-    tempDeviceInRoom.forEach((element) {
+    for (final element in tempDeviceInRoom) {
       tempLightsInRoom.add(element as GenericBoilerDE);
-    });
+    }
 
     return BoilersInTheRoom(
       roomEntity: roomEntity,
@@ -35,15 +36,15 @@ class BoilersInTheRoom extends StatelessWidget {
 
   final RoomEntity roomEntity;
   final List<GenericBoilerDE>? boilersInRoom;
-  final List<Color>? roomColorGradiant;
+  final ListOfColors? roomColorGradiant;
 
   @override
   Widget build(BuildContext context) {
     String deviceText;
     if (boilersInRoom!.length == 1) {
-      deviceText = boilersInRoom![0].defaultName.getOrCrash()!;
+      deviceText = boilersInRoom![0].cbjEntityName.getOrCrash()!;
     } else {
-      deviceText = '_Blinds'.tr(args: [roomEntity.defaultName.getOrCrash()]);
+      deviceText = '_Blinds'.tr(args: [roomEntity.cbjEntityName.getOrCrash()]);
     }
 
     return GestureDetector(
@@ -95,7 +96,7 @@ class BoilersInTheRoom extends StatelessWidget {
                           border: Border.all(
                             color: Theme.of(context)
                                 .textTheme
-                                .bodyText1!
+                                .bodyLarge!
                                 .color!
                                 .withOpacity(0.5),
                           ),
@@ -106,7 +107,7 @@ class BoilersInTheRoom extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 13,
-                            color: Theme.of(context).textTheme.bodyText1!.color,
+                            color: Theme.of(context).textTheme.bodyLarge!.color,
                           ),
                         ),
                       ),
@@ -135,7 +136,7 @@ class BoilersInTheRoom extends StatelessWidget {
                   deviceText,
                   maxLines: 1,
                   style: TextStyle(
-                    color: Theme.of(context).textTheme.bodyText1!.color,
+                    color: Theme.of(context).textTheme.bodyLarge!.color,
                   ),
                 ),
               ],
@@ -151,9 +152,9 @@ class BoilersInTheRoom extends StatelessWidget {
 
   List<String> extractDevicesId() {
     final List<String> devicesIdList = [];
-    boilersInRoom!.forEach((element) {
+    for (final element in boilersInRoom!) {
       devicesIdList.add(element.uniqueId.getOrCrash());
-    });
+    }
     return devicesIdList;
   }
 }

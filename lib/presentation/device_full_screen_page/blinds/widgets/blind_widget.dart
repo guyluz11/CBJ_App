@@ -1,5 +1,5 @@
 import 'package:cybear_jinni/application/blinds/blinds_actor/blinds_actor_bloc.dart';
-import 'package:cybear_jinni/domain/devices/generic_blinds_device/generic_blinds_entity.dart';
+import 'package:cybear_jinni/domain/generic_devices/generic_blinds_device/generic_blinds_entity.dart';
 import 'package:cybear_jinni/infrastructure/core/gen/cbj_hub_server/protoc_as_dart/cbj_hub_server.pbgrpc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -15,23 +15,22 @@ class BlindWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size screenSize = MediaQuery.of(context).size;
-    final double sizeBoxWidth = screenSize.width * 0.25;
+    // final Size screenSize = MediaQuery.of(context).size;
 
-    final deviceState = _deviceEntity.deviceStateGRPC.getOrCrash();
+    final deviceState = _deviceEntity.entityStateGRPC.getOrCrash();
     final deviceAction = _deviceEntity.blindsSwitchState!.getOrCrash();
 
-    bool toggleValue = false;
-    Color toggleColor = Colors.blueGrey;
+    // bool toggleValue = false;
+    // Color toggleColor = Colors.blueGrey;
 
-    if (deviceAction == DeviceActions.on.toString()) {
-      toggleValue = true;
-      if (deviceState == DeviceStateGRPC.ack.toString()) {
-        toggleColor = const Color(0xFFFFDF5D);
+    if (deviceAction == EntityActions.on.toString()) {
+      // toggleValue = true;
+      if (deviceState == EntityStateGRPC.ack.toString()) {
+        // toggleColor = const Color(0xFFFFDF5D);
       }
     } else {
-      if (deviceState == DeviceStateGRPC.ack.toString()) {
-        toggleColor = Theme.of(context).primaryColorDark;
+      if (deviceState == EntityStateGRPC.ack.toString()) {
+        // toggleColor = Theme.of(context).primaryColorDark;
       }
     }
 
@@ -70,12 +69,12 @@ class BlindWidget extends StatelessWidget {
                   child: Tab(
                     icon: FaIcon(
                       FontAwesomeIcons.arrowDown,
-                      color: Theme.of(context).textTheme.bodyText1!.color,
+                      color: Theme.of(context).textTheme.bodyLarge!.color,
                     ),
                     child: Text(
                       'Down',
                       style: TextStyle(
-                        color: Theme.of(context).textTheme.bodyText1!.color,
+                        color: Theme.of(context).textTheme.bodyLarge!.color,
                         fontSize: 16,
                       ),
                     ).tr(),
@@ -108,12 +107,12 @@ class BlindWidget extends StatelessWidget {
                   child: Tab(
                     icon: FaIcon(
                       FontAwesomeIcons.solidHand,
-                      color: Theme.of(context).textTheme.bodyText1!.color,
+                      color: Theme.of(context).textTheme.bodyLarge!.color,
                     ),
                     child: Text(
                       'Stop',
                       style: TextStyle(
-                        color: Theme.of(context).textTheme.bodyText1!.color,
+                        color: Theme.of(context).textTheme.bodyLarge!.color,
                         fontSize: 16,
                       ),
                     ).tr(),
@@ -146,12 +145,12 @@ class BlindWidget extends StatelessWidget {
                   child: Tab(
                     icon: FaIcon(
                       FontAwesomeIcons.arrowUp,
-                      color: Theme.of(context).textTheme.bodyText1!.color,
+                      color: Theme.of(context).textTheme.bodyLarge!.color,
                     ),
                     child: Text(
                       'Up',
                       style: TextStyle(
-                        color: Theme.of(context).textTheme.bodyText1!.color,
+                        color: Theme.of(context).textTheme.bodyLarge!.color,
                         fontSize: 16,
                       ),
                     ).tr(),

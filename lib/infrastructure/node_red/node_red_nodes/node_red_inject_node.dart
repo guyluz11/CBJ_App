@@ -5,17 +5,11 @@ import 'package:cybear_jinni/utils.dart';
 ///
 class NodeRedInjectAtASpecificTimeNode extends NodeRedVisualNodeAbstract {
   NodeRedInjectAtASpecificTimeNode({
-    String? id,
-    String? name,
-    List<List<String>>? wires,
-    required this.daysToRepeat,
-    required this.hourToRepeat,
-    required this.minutesToRepeat,
+    required this.daysToRepeat, required this.hourToRepeat, required this.minutesToRepeat, super.id,
+    super.name,
+    super.wires,
   }) : super(
-          id: id,
           type: 'inject',
-          name: name,
-          wires: wires,
         );
 
   RoutineCbjRepeatDateDays daysToRepeat;

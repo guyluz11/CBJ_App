@@ -3,6 +3,7 @@ import 'package:cybear_jinni/domain/vendors/login_abstract/login_entity_abstract
 import 'package:cybear_jinni/domain/vendors/login_abstract/value_login_objects_core.dart';
 import 'package:cybear_jinni/domain/vendors/tuya_login/generic_tuya_login_value_objects.dart';
 import 'package:cybear_jinni/infrastructure/core/gen/cbj_hub_server/protoc_as_dart/cbj_hub_server.pbgrpc.dart';
+
 import 'package:cybear_jinni/infrastructure/generic_vendors_login/generic_login_abstract/login_entity_dto_abstract.dart';
 import 'package:cybear_jinni/infrastructure/generic_vendors_login/generic_tuya_login/generic_tuya_login_dtos.dart';
 import 'package:dartz/dartz.dart';
@@ -12,17 +13,14 @@ import 'package:dartz/dartz.dart';
 class GenericTuyaLoginDE extends LoginEntityAbstract {
   /// All public field of GenericTuya entity
   GenericTuyaLoginDE({
-    required CoreLoginSenderId senderUniqueId,
-    required CoreLoginVendor loginVendor,
+    required super.senderUniqueId,
+    required super.loginVendor,
     required this.tuyaUserName,
     required this.tuyaUserPassword,
     required this.tuyaCountryCode,
     required this.tuyaBizType,
     required this.tuyaRegion,
-  }) : super(
-          senderUniqueId: senderUniqueId,
-          loginVendor: loginVendor,
-        );
+  });
 
   /// Empty instance of GenericTuyaEntity
   factory GenericTuyaLoginDE.empty() => GenericTuyaLoginDE(
@@ -59,7 +57,7 @@ class GenericTuyaLoginDE extends LoginEntityAbstract {
   // /// Will return failure if any of the fields failed or return unit if fields
   // /// have legit values
   // Option<CoreFailure<dynamic>> get failureOption {
-  //   return defaultName!.value.fold((f) => some(f), (_) => none());
+  //   return cbjEntityName!.value.fold((f) => some(f), (_) => none());
   //
   // return body.failureOrUnit
   //     .andThen(todos.failureOrUnit)

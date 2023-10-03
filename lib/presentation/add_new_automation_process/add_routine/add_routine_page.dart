@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cybear_jinni/application/add_new_routine/add_new_routine_bloc.dart';
 import 'package:cybear_jinni/domain/routine/value_objects_routine_cbj.dart';
 import 'package:cybear_jinni/injection.dart';
@@ -10,8 +11,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 /// Page for adding new routine
+@RoutePage()
 class AddRoutinePage extends StatelessWidget {
-  AddRoutinePage({
+  const AddRoutinePage({
     required this.daysToRepeat,
     required this.hourToRepeat,
     required this.minutesToRepeat,
@@ -33,7 +35,7 @@ class AddRoutinePage extends StatelessWidget {
         backgroundColor: Colors.black,
         systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
-      body: Container(
+      body: ColoredBox(
         color: HexColor('#FBF5F9'),
         child: Column(
           children: [

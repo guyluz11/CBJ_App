@@ -1,5 +1,5 @@
 import 'package:cybear_jinni/application/switch_toggle/switch_toggle_bloc.dart';
-import 'package:cybear_jinni/domain/devices/generic_switch_device/generic_switch_entity.dart';
+import 'package:cybear_jinni/domain/generic_devices/generic_switch_device/generic_switch_entity.dart';
 import 'package:cybear_jinni/infrastructure/core/gen/cbj_hub_server/protoc_as_dart/cbj_hub_server.pbgrpc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,19 +24,19 @@ class SwitchWidget extends StatelessWidget {
     final Size screenSize = MediaQuery.of(context).size;
     final double sizeBoxWidth = screenSize.width * 0.25;
 
-    final deviceState = _deviceEntity!.deviceStateGRPC.getOrCrash();
+    final deviceState = _deviceEntity!.entityStateGRPC.getOrCrash();
     final deviceAction = _deviceEntity!.switchState!.getOrCrash();
 
     bool toggleValue = false;
     Color toggleColor = Colors.blueGrey;
 
-    if (deviceAction == DeviceActions.on.toString()) {
+    if (deviceAction == EntityActions.on.toString()) {
       toggleValue = true;
-      if (deviceState == DeviceStateGRPC.ack.toString()) {
+      if (deviceState == EntityStateGRPC.ack.toString()) {
         toggleColor = const Color(0xFFFFDF5D);
       }
     } else {
-      if (deviceState == DeviceStateGRPC.ack.toString()) {
+      if (deviceState == EntityStateGRPC.ack.toString()) {
         toggleColor = Theme.of(context).primaryColorDark;
       }
     }
@@ -57,10 +57,10 @@ class SwitchWidget extends StatelessWidget {
             activeToggleColor: const Color(0xFF2F363D),
             inactiveToggleColor: Colors.deepPurple,
             activeSwitchBorder: Border.all(
-              color: (Theme.of(context).textTheme.bodyText1!.color)!,
+              color: Theme.of(context).textTheme.bodyLarge!.color!,
             ),
             inactiveSwitchBorder: Border.all(
-              color: (Theme.of(context).textTheme.bodyText1!.color)!,
+              color: Theme.of(context).textTheme.bodyLarge!.color!,
             ),
             activeColor: toggleColor,
             inactiveColor: toggleColor,

@@ -2,6 +2,7 @@ import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:cybear_jinni/application/tuya_auth/tuya_sign_in_form/tuya_sign_in_form_bloc.dart';
 import 'package:cybear_jinni/domain/vendors/login_abstract/core_login_failures.dart';
+import 'package:cybear_jinni/domain/vendors/vendor.dart';
 import 'package:cybear_jinni/infrastructure/core/gen/cbj_hub_server/protoc_as_dart/cbj_hub_server.pbgrpc.dart';
 import 'package:cybear_jinni/presentation/routes/app_router.gr.dart';
 import 'package:dartz/dartz.dart';
@@ -12,6 +13,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SmartLifeSignInForm extends StatelessWidget {
+  const SmartLifeSignInForm(this.vendor);
+
+  final Vendor vendor;
+
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
@@ -56,10 +61,10 @@ class SmartLifeSignInForm extends StatelessWidget {
                         child: Container(
                           width: 180,
                           height: 180,
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             image: DecorationImage(
                               image: NetworkImage(
-                                'https://play-lh.googleusercontent.com/Qrq9zB_-bWuAD0ETPeBRTsRHOSjmW_uzmexY5rF7wo2JeNc-oLuvsQSYdg0Uxsq6mkA=s180',
+                                vendor.image ?? '',
                               ),
                               fit: BoxFit.fitHeight,
                             ),
@@ -153,7 +158,10 @@ class SmartLifeSignInForm extends StatelessWidget {
                     const SizedBox(
                       height: 8,
                     ),
-                    const Text('Select Region:        '),
+                    const Text(
+                      'Select Region:',
+                      style: TextStyle(color: Colors.black),
+                    ),
                     DropdownButton<String>(
                       value: context
                           .read<TuyaSignInFormBloc>()
@@ -194,7 +202,8 @@ class SmartLifeSignInForm extends StatelessWidget {
                                     ),
                                   );
                               context.read<TuyaSignInFormBloc>().add(
-                                    const TuyaSignInFormEvent.signIn(),
+                                    const TuyaSignInFormEvent
+                                        .signInWithTuyaApiKey(),
                                   );
 
                               Fluttertoast.showToast(
@@ -206,7 +215,7 @@ class SmartLifeSignInForm extends StatelessWidget {
                                 backgroundColor: Colors.lightBlueAccent,
                                 textColor: Theme.of(context)
                                     .textTheme
-                                    .bodyText1!
+                                    .bodyLarge!
                                     .color,
                                 fontSize: 16.0,
                               );
@@ -221,7 +230,7 @@ class SmartLifeSignInForm extends StatelessWidget {
                       const SizedBox(
                         height: 8,
                       ),
-                      const LinearProgressIndicator()
+                      const LinearProgressIndicator(),
                     ],
                   ],
                 ),

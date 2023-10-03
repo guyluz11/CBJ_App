@@ -17,17 +17,16 @@ class HubClient {
     await channel?.terminate();
 
     channel = await _createCbjHubClient(addressToHub, hubPort);
+    channel!.onConnectionStateChanged.listen((event) {
+      logger.i('gRPC connection state $event');
+    });
     stub = CbjHubClient(channel!);
     ResponseStream<RequestsAndStatusFromHub> response;
 
     try {
-      response = stub!.clientTransferDevices(
+      response = stub!.clientTransferEntities(
         AppRequestsToHub.appRequestsToHubStreamBroadcast.stream,
       );
-
-      // Connection should establish after that and than we can send first
-      // connection request
-      await Future.delayed(const Duration(milliseconds: 400));
 
       AppRequestsToHub.appRequestsToHubStreamController
           .add(ClientStatusRequests(sendingType: SendingType.firstConnection));
@@ -83,7 +82,7 @@ class HubRequestsToApp {
   static final hubRequestsStreamController =
       StreamController<RequestsAndStatusFromHub>();
 
-  static lisenToApp() async {
+  static Future<void> lisenToApp() async {
     if (boolListenWorking) {
       return;
     }
@@ -104,7 +103,7 @@ class AppRequestsToHub {
   static final appRequestsToHubStreamController =
       StreamController<ClientStatusRequests>();
 
-  static lisenToApp() async {
+  static Future<void> lisenToApp() async {
     if (boolListenWorking) {
       return;
     }

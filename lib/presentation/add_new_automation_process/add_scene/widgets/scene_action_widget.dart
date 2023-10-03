@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cybear_jinni/domain/devices/abstract_device/device_entity_abstract.dart';
+import 'package:cybear_jinni/domain/generic_devices/abstract_device/device_entity_abstract.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -7,7 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 /// Contains device name and action name and sores more data like device id
 class SceneActionWidget extends StatelessWidget {
   /// Get all and store all info about the action
-  SceneActionWidget({
+  const SceneActionWidget({
     required this.deviceEntityAbstract,
     required this.propertyToChange,
     required this.actionToChange,
@@ -24,7 +24,7 @@ class SceneActionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return ColoredBox(
       color: Colors.blue.withOpacity(0.3),
       child: ListTile(
         leading: const FaIcon(
@@ -32,7 +32,7 @@ class SceneActionWidget extends StatelessWidget {
           color: Colors.yellow,
         ),
         title: AutoSizeText(
-          '${deviceEntityAbstract.defaultName.getOrCrash()!} - $propertyToChange',
+          '${deviceEntityAbstract.cbjEntityName.getOrCrash()!} - $propertyToChange',
           maxLines: 2,
         ),
         trailing: AutoSizeText(

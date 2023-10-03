@@ -8,6 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 /// Page for the user to decide what kind of Scene he wants to add
+@RoutePage()
 class ChooseAutomationTypeToAddPage extends StatelessWidget {
   void backButtonFunction(BuildContext context) {
     Navigator.pop(context);
@@ -21,7 +22,7 @@ class ChooseAutomationTypeToAddPage extends StatelessWidget {
         backgroundColor: Colors.black,
         systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
-      body: Container(
+      body: ColoredBox(
         color: HexColor('#FBF5F9'),
         child: Column(
           children: [
@@ -74,10 +75,10 @@ class ChooseAutomationTypeToAddPage extends StatelessWidget {
                             onPressed: () {
                               context.router.push(const AddSceneRoute());
                             },
-                            child: Column(
+                            child: const Column(
                               children: [
                                 Row(
-                                  children: const [
+                                  children: [
                                     Text(
                                       'Scenes - ',
                                       style: TextStyle(
@@ -91,17 +92,17 @@ class ChooseAutomationTypeToAddPage extends StatelessWidget {
                                       style: TextStyle(
                                         color: Colors.black,
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
-                                const Text(
+                                Text(
                                   'Combining a number of actions in a big button.',
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 13,
                                   ),
                                 ),
-                                const Text(
+                                Text(
                                   'Example:\n"Arriving Home" button that will turn on some lights and turn up all the blinds when you click on it.',
                                   style: TextStyle(
                                     color: Colors.black,
@@ -134,10 +135,10 @@ class ChooseAutomationTypeToAddPage extends StatelessWidget {
                               // );
                               context.router.push(const PickRepeatTimeRoute());
                             },
-                            child: Column(
+                            child: const Column(
                               children: [
                                 Row(
-                                  children: const [
+                                  children: [
                                     Text(
                                       'Routines - ',
                                       style: TextStyle(
@@ -151,23 +152,23 @@ class ChooseAutomationTypeToAddPage extends StatelessWidget {
                                       style: TextStyle(
                                         color: Colors.black,
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
-                                const Text(
+                                Text(
                                   'Like alarm clock but for triggering actions.',
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 13,
                                   ),
                                 ),
-                                const Text(
+                                Text(
                                   'Example:\nTurn on the thermostat for an hour and open all blinds each day at 7:00am.',
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 15,
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),
@@ -197,10 +198,10 @@ class ChooseAutomationTypeToAddPage extends StatelessWidget {
                               // context.router
                               //     .push(const AddBindingRoute());
                             },
-                            child: Column(
+                            child: const Column(
                               children: [
                                 Row(
-                                  children: const [
+                                  children: [
                                     Text(
                                       'Bindings - ',
                                       style: TextStyle(
@@ -214,23 +215,23 @@ class ChooseAutomationTypeToAddPage extends StatelessWidget {
                                       style: TextStyle(
                                         color: Colors.black,
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
-                                const Text(
+                                Text(
                                   'Trigger actions whenever an external action occurs.',
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 13,
                                   ),
                                 ),
-                                const Text(
+                                Text(
                                   'Example:\nIf the home door got opened from 3:00am - 6:00am trigger anti-thief alarm system.',
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 15,
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),

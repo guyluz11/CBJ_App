@@ -1,9 +1,10 @@
-import 'package:another_flushbar/flushbar_helper.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cybear_jinni/domain/devices/abstract_device/device_entity_abstract.dart';
-import 'package:cybear_jinni/domain/devices/generic_smart_tv/generic_smart_tv_entity.dart';
+import 'package:cybear_jinni/domain/generic_devices/abstract_device/device_entity_abstract.dart';
+import 'package:cybear_jinni/domain/generic_devices/generic_smart_tv/generic_smart_tv_entity.dart';
 import 'package:cybear_jinni/domain/room/room_entity.dart';
-import 'package:cybear_jinni/utils.dart';
+import 'package:cybear_jinni/presentation/core/types_to_pass.dart';
+import 'package:cybear_jinni/presentation/routes/app_router.gr.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -18,13 +19,13 @@ class SmartTvInTheRoom extends StatelessWidget {
   factory SmartTvInTheRoom.withAbstractDevice({
     required RoomEntity roomEntity,
     required List<DeviceEntityAbstract> tempDeviceInRoom,
-    required List<Color> tempRoomColorGradiant,
+    required ListOfColors tempRoomColorGradiant,
   }) {
     final List<GenericSmartTvDE> tempLightsInRoom = [];
 
-    tempDeviceInRoom.forEach((element) {
+    for (final element in tempDeviceInRoom) {
       tempLightsInRoom.add(element as GenericSmartTvDE);
-    });
+    }
 
     return SmartTvInTheRoom(
       roomEntity: roomEntity,
@@ -35,31 +36,26 @@ class SmartTvInTheRoom extends StatelessWidget {
 
   final RoomEntity roomEntity;
   final List<GenericSmartTvDE>? smartTvsInRoom;
-  final List<Color>? roomColorGradiant;
+  final ListOfColors? roomColorGradiant;
 
   @override
   Widget build(BuildContext context) {
     String deviceText;
     if (smartTvsInRoom!.length == 1) {
-      deviceText = smartTvsInRoom![0].defaultName.getOrCrash()!;
+      deviceText = smartTvsInRoom![0].cbjEntityName.getOrCrash()!;
     } else {
-      deviceText = '_SmartTvs'.tr(args: [roomEntity.defaultName.getOrCrash()]);
+      deviceText =
+          '_SmartTvs'.tr(args: [roomEntity.cbjEntityName.getOrCrash()]);
     }
 
     return GestureDetector(
       onTap: () {
-        // context.router.push(RoomsSmartTvsRoute(
-        //     showDevicesOnlyFromRoomId: smart_tvsInRoom![0].roomId.getOrCrash(),
-        //     roomColorGradiant: roomColorGradiant));
-        logger.w('TV page is not supported');
-        FlushbarHelper.createInformation(
-          message: 'TV page is currently missing',
-          // failure.map(
-          //   cancelledByUser: (_) => 'Cancelled',
-          //   serverError: (_) => 'Server error',
-          //   invalidApiKey: (_) => 'Email already in use',
-          // ),
-        ).show(context);
+        context.router.push(
+          RoomsSmartTvsRoute(
+            roomEntity: roomEntity,
+            roomColorGradiant: roomColorGradiant,
+          ),
+        );
       },
       child: Container(
         decoration: BoxDecoration(
@@ -101,7 +97,7 @@ class SmartTvInTheRoom extends StatelessWidget {
                           border: Border.all(
                             color: Theme.of(context)
                                 .textTheme
-                                .bodyText1!
+                                .bodyLarge!
                                 .color!
                                 .withOpacity(0.5),
                           ),
@@ -112,7 +108,7 @@ class SmartTvInTheRoom extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 13,
-                            color: Theme.of(context).textTheme.bodyText1!.color,
+                            color: Theme.of(context).textTheme.bodyLarge!.color,
                           ),
                         ),
                       ),
@@ -139,7 +135,7 @@ class SmartTvInTheRoom extends StatelessWidget {
                   deviceText,
                   maxLines: 1,
                   style: TextStyle(
-                    color: Theme.of(context).textTheme.bodyText1!.color,
+                    color: Theme.of(context).textTheme.bodyLarge!.color,
                   ),
                 ),
               ],
@@ -152,9 +148,9 @@ class SmartTvInTheRoom extends StatelessWidget {
 
   List<String> extractDevicesId() {
     final List<String> devicesIdList = [];
-    smartTvsInRoom!.forEach((element) {
+    for (final element in smartTvsInRoom!) {
       devicesIdList.add(element.uniqueId.getOrCrash());
-    });
+    }
     return devicesIdList;
   }
 }

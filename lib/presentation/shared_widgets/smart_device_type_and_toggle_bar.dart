@@ -1,5 +1,6 @@
-import 'package:cybear_jinni/domain/devices/generic_light_device/generic_light_entity.dart';
+import 'package:cybear_jinni/domain/generic_devices/generic_light_device/generic_light_entity.dart';
 import 'package:cybear_jinni/infrastructure/core/gen/cbj_hub_server/protoc_as_dart/cbj_hub_server.pbgrpc.dart';
+
 import 'package:cybear_jinni/infrastructure/objects/enums_cbj.dart';
 import 'package:cybear_jinni/presentation/device_full_screen_page/lights/smart_lighte_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -14,11 +15,11 @@ class SmartDeviceTypeAndToggleBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DeviceTypes deviceType =
-        EnumHelperCbj.stringToDt(_smartDeviceObject.deviceTypes.getOrCrash())!;
+    final EntityTypes deviceType =
+        EnumHelperCbj.stringToDt(_smartDeviceObject.entityTypes.getOrCrash())!;
     return Row(
       children: <Widget>[
-        if (deviceType == DeviceTypes.light)
+        if (deviceType == EntityTypes.light)
           Container(
             margin: const EdgeInsets.only(right: 5),
             child: const CircleAvatar(
@@ -26,7 +27,7 @@ class SmartDeviceTypeAndToggleBar extends StatelessWidget {
               child: FaIcon(FontAwesomeIcons.solidLightbulb),
             ),
           ),
-        if (deviceType == DeviceTypes.blinds)
+        if (deviceType == EntityTypes.blinds)
           Container(
             margin: const EdgeInsets.only(right: 5),
             child: const CircleAvatar(
@@ -39,13 +40,13 @@ class SmartDeviceTypeAndToggleBar extends StatelessWidget {
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 20,
-            color: Theme.of(context).textTheme.bodyText1!.color,
+            color: Theme.of(context).textTheme.bodyLarge!.color,
             backgroundColor: Colors.blueGrey
-//                color: (Theme.of(context).textTheme.bodyText1!.color)!,
+//                color: (Theme.of(context).textTheme.bodyLarge!.color)!,
             ,
           ),
         ).tr(args: <String>[EnumHelperCbj.dTToString(deviceType)]),
-        if (deviceType == DeviceTypes.light)
+        if (deviceType == EntityTypes.light)
           SizedBox(
             width: 100,
             child: SmartLightPage(

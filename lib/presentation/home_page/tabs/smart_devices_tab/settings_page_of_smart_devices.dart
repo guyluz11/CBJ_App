@@ -29,7 +29,7 @@ class SettingsPageSmartDevices extends StatelessWidget {
               Theme.of(context).primaryColor,
               Theme.of(context).colorScheme.secondary,
               Theme.of(context).colorScheme.secondary,
-              Theme.of(context).primaryColor
+              Theme.of(context).primaryColor,
             ],
           ),
         ),
@@ -57,7 +57,7 @@ class SettingsPageSmartDevices extends StatelessWidget {
                 'Open Access Point',
                 style: TextStyle(
                   fontSize: 25,
-                  color: Theme.of(context).textTheme.bodyText1!.color,
+                  color: Theme.of(context).textTheme.bodyLarge!.color,
                 ),
               ),
             ),

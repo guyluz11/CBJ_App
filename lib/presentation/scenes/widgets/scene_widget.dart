@@ -33,14 +33,14 @@ class SceneWidget extends StatelessWidget {
               margin: const EdgeInsets.fromLTRB(5, 0, 5, 10),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: Color(
+                  backgroundColor: Color(
                     int.parse(currentScene.backgroundColor.getOrCrash()),
                   ),
                   padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                     side: BorderSide(
-                      color: (Theme.of(context).textTheme.bodyText1!.color)!,
+                      color: Theme.of(context).textTheme.bodyLarge!.color!,
                       width: 0.6,
                     ),
                   ),
@@ -53,7 +53,7 @@ class SceneWidget extends StatelessWidget {
                     toastLength: Toast.LENGTH_SHORT,
                     gravity: ToastGravity.BOTTOM,
                     backgroundColor: Colors.purple,
-                    textColor: Theme.of(context).textTheme.bodyText1!.color,
+                    textColor: Theme.of(context).textTheme.bodyLarge!.color,
                     fontSize: 16.0,
                   );
 
@@ -62,8 +62,8 @@ class SceneWidget extends StatelessWidget {
                       .add(const SceneEvent.activateScene());
 
                   // smartDevicesWithWish
-                  //     .forEach((SmartDeviceObject key, List<DeviceActions> value) {
-                  //   for (final DeviceActions deviceActionForSmartDevice in value) {
+                  //     .forEach((SmartDeviceObject key, List<EntityActions> value) {
+                  //   for (final EntityActions deviceActionForSmartDevice in value) {
                   //     key.executeWish(wishEnumForSmartDevice);
                   //   }
                   // });
@@ -78,7 +78,7 @@ class SceneWidget extends StatelessWidget {
                     currentScene.name.getOrCrash(),
                     style: TextStyle(
                       fontSize: 23,
-                      color: Theme.of(context).textTheme.bodyText1!.color,
+                      color: Theme.of(context).textTheme.bodyLarge!.color,
                     ),
                     textAlign: TextAlign.center,
                   ),

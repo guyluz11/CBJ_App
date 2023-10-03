@@ -12,8 +12,6 @@ class AddNewDeviceWidgetPopup extends StatefulWidget {
 }
 
 class _AddNewDeviceWidgetPopup extends State<AddNewDeviceWidgetPopup> {
-  static String? _ip;
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   static Future<String?> getMyWifiIp() async {
@@ -31,7 +29,7 @@ class _AddNewDeviceWidgetPopup extends State<AddNewDeviceWidgetPopup> {
               autofocus: true,
               initialValue:
                   snapshot.data?.substring(0, snapshot.data!.length - 1),
-              onSaved: (String? ip) => _ip = ip,
+              onSaved: (String? ip) {},
               keyboardType: TextInputType.number,
               validator: (String? value) {
                 if (value!.isEmpty) {
@@ -89,9 +87,9 @@ class DropDownMenu extends StatefulWidget {
 }
 
 class _DropDownMenu extends State<DropDownMenu> {
-  String dropdownValue = DeviceTypes.light.toString().tr();
+  String dropdownValue = EntityTypes.light.toString().tr();
 
-  String _deviceTypeToString(DeviceTypes deviceType) {
+  String _deviceTypeToString(EntityTypes deviceType) {
     return EnumHelperCbj.dTToString(deviceType);
   }
 
@@ -106,9 +104,9 @@ class _DropDownMenu extends State<DropDownMenu> {
       },
 //            },'Light', 'Dynamic light', 'Blinds', 'Four'
       items: <String>[
-        _deviceTypeToString(DeviceTypes.light),
-        _deviceTypeToString(DeviceTypes.blinds),
-        _deviceTypeToString(DeviceTypes.boiler),
+        _deviceTypeToString(EntityTypes.light),
+        _deviceTypeToString(EntityTypes.blinds),
+        _deviceTypeToString(EntityTypes.boiler),
       ].map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,

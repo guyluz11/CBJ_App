@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:cybear_jinni/domain/devices/generic_light_device/generic_light_entity.dart';
-import 'package:cybear_jinni/domain/devices/generic_light_device/generic_light_value_objects.dart';
+import 'package:cybear_jinni/domain/generic_devices/generic_light_device/generic_light_entity.dart';
+import 'package:cybear_jinni/domain/generic_devices/generic_light_device/generic_light_value_objects.dart';
 import 'package:cybear_jinni/infrastructure/core/gen/cbj_hub_server/protoc_as_dart/cbj_hub_server.pbgrpc.dart';
 import 'package:cybear_jinni/infrastructure/objects/enums_cbj.dart';
 import 'package:cybear_jinni/utils.dart';
@@ -55,14 +55,14 @@ class _SmartLightPage extends State<SmartLightPage> {
     return _switchState = EnumHelperCbj.stringToDeviceAction(
           _light!.lightSwitchState!.getOrCrash(),
         ) ==
-        DeviceActions.on;
+        EntityActions.on;
   }
 
   Future<void> _onChange(bool value) async {
     logger.v('OnChange $value');
     _light?.lightSwitchState = GenericLightSwitchState(
       EnumHelperCbj.deviceActionToString(
-        value ? DeviceActions.on : DeviceActions.off,
+        value ? EntityActions.on : EntityActions.off,
       ),
     );
     if (mounted) {
@@ -78,10 +78,10 @@ class _SmartLightPage extends State<SmartLightPage> {
     return Column(
       children: <Widget>[
         Text(
-          _light!.defaultName.getOrCrash()!, //  Show light name
+          _light!.cbjEntityName.getOrCrash()!, //  Show light name
           style: TextStyle(
             fontSize: 19.0,
-            color: Theme.of(context).textTheme.bodyText2!.color,
+            color: Theme.of(context).textTheme.bodyMedium!.color,
           ),
         ),
         const SizedBox(
@@ -100,10 +100,10 @@ class _SmartLightPage extends State<SmartLightPage> {
             activeToggleColor: const Color(0xFF2F363D),
             inactiveToggleColor: Theme.of(context).primaryColor,
             activeSwitchBorder: Border.all(
-              color: (Theme.of(context).textTheme.bodyText1!.color)!,
+              color: Theme.of(context).textTheme.bodyLarge!.color!,
             ),
             inactiveSwitchBorder: Border.all(
-              color: (Theme.of(context).textTheme.bodyText1!.color)!,
+              color: Theme.of(context).textTheme.bodyLarge!.color!,
             ),
             activeColor: const Color(0xFFFFDF5D),
             inactiveColor: Theme.of(context).primaryColorDark,
@@ -113,7 +113,7 @@ class _SmartLightPage extends State<SmartLightPage> {
             ),
             inactiveIcon: Icon(
               FontAwesomeIcons.lightbulb,
-              color: Theme.of(context).textTheme.bodyText1!.color,
+              color: Theme.of(context).textTheme.bodyLarge!.color,
             ),
             onToggle: (bool value) => _onChange(value),
           ),
@@ -132,19 +132,19 @@ class LifecycleEventHandler extends WidgetsBindingObserver {
   final AsyncCallback? suspendingCallBack;
 
   @override
-  Future<Null> didChangeAppLifecycleState(AppLifecycleState state) async {
+  Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
     switch (state) {
       case AppLifecycleState.resumed:
         if (resumeCallBack != null) {
           await resumeCallBack!();
         }
-        break;
       case AppLifecycleState.inactive:
       case AppLifecycleState.paused:
       case AppLifecycleState.detached:
         if (suspendingCallBack != null) {
           await suspendingCallBack!();
         }
+      case AppLifecycleState.hidden:
         break;
     }
   }
